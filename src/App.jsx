@@ -1,22 +1,25 @@
-import React from "react";
+import React, { StrictMode,useState } from "react";
+import { CartContext } from "./contexts.jsx";
 import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza.jsx";
+import Order from "./Order.jsx";
+import PizzaOfTheDay from "./PizzaOfTheDay.jsx";
+import Header from "./Header.jsx";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-
 const App = () => {
+  const cartHook = useState([]);
   return (
-    <div>
-      <h1>Padre Gino's Pizza Order Now</h1>
-      <Pizza name="Pepperoni Pizza" ingredients="Mozzarella, Pepperoni, Tomato Sauce" />
-      <Pizza name="Margherita Pizza" ingredients="Mozzarella, Tomato Sauce, Basil" />
-      <Pizza name="Hawaiian Pizza" ingredients="Mozzarella, Ham, Pineapple, Tomato Sauce" />
-    </div>
-  )
+    <StrictMode>
+      <CartContext.Provider value={cartHook}>
+      <div>
+        <Header />
+        <Order />
+        <PizzaOfTheDay />
+      </div>
+      </CartContext.Provider>
+    </StrictMode>
+  );
 };
-
-
-
 
 root.render(React.createElement(App));
