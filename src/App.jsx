@@ -1,23 +1,18 @@
-import React, { StrictMode,useState } from "react";
-import { CartContext } from "./contexts.jsx";
+import React, { StrictMode } from "react";
+
 import { createRoot } from "react-dom/client";
-import Order from "./Order.jsx";
-import PizzaOfTheDay from "./PizzaOfTheDay.jsx";
-import Header from "./Header.jsx";
+
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
+const router = createRouter({routeTree });
+
 const App = () => {
-  const cartHook = useState([]);
   return (
     <StrictMode>
-      <CartContext.Provider value={cartHook}>
-      <div>
-        <Header />
-        <Order />
-        <PizzaOfTheDay />
-      </div>
-      </CartContext.Provider>
+      <RouterProvider router={router}/>
     </StrictMode>
   );
 };
